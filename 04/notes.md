@@ -147,3 +147,37 @@ function draw() {
     ellipse(mouseX, mouseY, 100, 100);
 }
 ```
+
+### Feltételek
+
+A múltkori órán láttuk, hogy az `if` konstrukcióval tudunk feltételeket megadni, hogy milyen esetben mi történjen. Emlékeztetőül itt a szintaxis:  
+```
+if (condition) {
+    // commands if true
+} else {
+    // commands if false
+}
+```
+A `condition` helyére egy boolean értéket visszaadó feltételt kell beírni. Az első, kapcsos zárójelekkel körülzárt blokkba azokat a parancsokat, amiket akkor akarunk végrehajtani, ha a feltétel igaz. A konstrukció második fele opcionális: ha akarunk "különben" ágat, akkor kell csak kiírnunk az `else`-et és a második blokkot. Például:
+```
+if (x < 300) {
+    alert('Az x változó értéke most épp kisebb mint 300.');
+} else {
+    alert('Az x változó értéke 300 vagy több.');
+}
+```
+
+A fentiek ismeretében írjunk egy prorgamot, ami feketére színezi a hátteret, ha az egér a képernyő bal felében van, és fehérre, ha a jobb felében! Azt, hogy az egér a képernyő melyik felében van, abból állapítjuk meg, hogy a mouseX hogy viszonyul a képernyő szélességének a feléhez.
+```
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+}
+
+function draw() {
+    if (mouseX < windowWidth / 2) {
+        background('black');
+    } else {
+        background('white');
+    }
+}
+```
