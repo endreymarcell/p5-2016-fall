@@ -30,7 +30,7 @@ Rajzolj a kép aljára egy pockot, tengerimalacot vagy csupasz földikutyát, am
 __Fever in your eyes__  
 Rajzolj a vászonra egy hőmérőt (kép betöltéséve), és rajzolj bele egy higanycsíkot (azt viszont valóban rajzold), ami mindig olyan magasan áll, ahol az egeret tartod - de a hőmérő tetején ne tudjon túlmenni!  
 
-__Tangled up__
+__Tangled up__  
 Rajzolj a vászonra négy vonalat, úgy, hogy a vonalak a képernyő egy-egy sarkából induljanak, és mindegyik az egér aktuális helyzetéig tartson, tehát kövessék az egeret, ahogy mozgatod.
 
 __Jaws*__  
