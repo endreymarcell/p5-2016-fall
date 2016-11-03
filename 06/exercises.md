@@ -12,7 +12,7 @@ Keress egy képet egy zongoráról és rakd a képernyő közepére. Keress egy 
 
 __Mood changes__
 
-Írj egy programot, amiben a képernyő két felét egy függőleges vonal választja el. Bal oldalra tegyél be egy síró emoji-t (nem kell megrajzolni, keress hozzá képet), jobb oldalra pedig egy nevetőt. Keress egy-egy hangot mindkettőhöz, és attól függően, hogy az egeret a képernyő bal vagy jobb oldalán tartod, játsszd le az egyiket vagy a másikat.
+Írj egy programot, amiben a képernyő két felét egy függőleges vonal választja el. Bal oldalra tegyél be egy síró emojit (nem kell megrajzolni, keress hozzá képet), jobb oldalra pedig egy nevetőt. Keress egy-egy hangot mindkettőhöz, és attól függően, hogy az egeret a képernyő bal vagy jobb oldalán tartod, játsszd le az egyiket vagy a másikat.
 
 ## Mobil: touch
 
