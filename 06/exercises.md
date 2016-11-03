@@ -16,6 +16,10 @@ __Mood changes__
 
 ## Mobil: touch
 
+__Folyamatos vonalak__
+
+Írd át a paint programot úgy, hogy ne pöttyök legyenek, hanem folyamatos vonalak. Ezt úgy érdemes csinálni, hogy mikor megérinted a képernyőt, akkor elmented az érintés helyét két változóba, és nem kört rajzolsz, hanem vonalat az elmentett pontokból az érintés mostani helyéig. (És figyelj rá, hogy előbb rajzold a vonalat, utána mentsd el az érintés helyét.)
+
 __Rajztábla__
 
 Írd meg a minimalista Paint-ed mobilra: ha húzod az ujjad a képernyőn, húzzon csíkot.
@@ -53,4 +57,3 @@ __A különbség__
 
 ## Funky
 
-TBD
