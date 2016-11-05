@@ -1,0 +1,108 @@
+# Hatodik óra: hangok és mobil
+
+## Hangok lejátszása
+
+Hangokat p5-ben a képekhez hasonló módon használni: először le kell töltenünk egy hangfájlt (.mp3 formátumban) ugyanabba a mappába, ahol a programunk van, a programon belül pedig először bele kell töltenünk egy változóba, utána abból a változóból tudjuk elindítani.  
+Először tehát létrehozunk egy változót a már letöltött hangfájlnak:  
+`var meow;`  
+Utána beletültjük a hangot a `loadSound()` paranccsal:
+`meow = loadSound('cat.mp3')`;  
+Lejátszani pedig úgy tudjuk, hogy meghívjuk a változón a `play()` függvényt:  
+`meow.play()`  
+(Itt tehát a szintaxis kicsit különbözik a képek megjelenítésétől.)  
+
+Ezzel sajnos még van egy probléma, amit meg kell oldanunk: ha a hangot például egérkattintásra szeretnénk elindítani, a másodpercenként vagy hatvanszor lefutó `draw()` függvény, amiben ezt a bizonyos `play()` parancsot kiadjuk, jópárszor le fog futni, mire mi felengedjük az egérgombot, a hang tehát sokszor el fog indulni, egymástól pár századmásodperc különbséggel. Azt szeretnénk, ha a hang csak akkor indulna el, ha a lejátszása még nincs folyamatban. Ehhez a `play()` parancsot betesszük egy `if`-be. A hangokat tartalmazó változóknak van egy `isPlaying()` nevű függvényük is, ami megmondja, hogy folyik-e már az adott hang lejátszása. Mi ennek pont a _fordítottját_ szeretnénk, tehát hogy a hang akkor induljon el, ha még nem játszódik le. Ezt megírjatjuk akár így:  
+```
+if (meow.isPlaying()) {
+
+} else {
+    meow.play();
+}
+```
+Kiolvasva: ha a hang már épp lejátszódik, akkor... (nem csinálj semmit) ...különben pedig indítsd el.  
+A másik megldás, hogy az `if` feltételét tagadjuk, tehát az ellentétét vesszük. JavaScriptben ezt a `!` jellel tudjuk megtenni. Így rövidebben is meg tudjuk írni a fenti parancsot:  
+```
+if (!meow.isPlaying()) {    
+    meow.play();
+}
+```
+
+## Hangok betöltése
+
+Ha a programunkban több képet is szeretnénk használni, esetleg hangokat is, abba a problémába ütközünk, hogy a program futása elindul, mielőtt a képek és a hangok betöltődtek volna. Ennek a megelőzésére a p5 biztosít egy harmadik speciális függvényt a `setup()` és a `draw()` mellett: ennek a neve `preload()`. Ez a függvény pontosan egyszer fut le, mégpedig még a `setup()` előtt. Ha ebben töltjük be a képeinket `loadImage()` és a hangjainkat `loadSound()` parancsokkal, akkor biztosak lehetünk benne, hogy a program futásakot már minden fájl rendelkezésre áll majd.  
+Itt van tehát egy teljes példaprogram, amiben betöltünk, majd kattintásra lejátszunk egy hangfájlt:  
+```
+var scream;
+
+function preload() {
+    scream = loadSound('texas_chain_saw_massacre.mp3');
+}
+
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+}
+
+function draw() {
+    background('black');
+    if (mouseIsPressed) {
+        if (!scream.isPlaying()) {
+            scream.play();
+        }
+    }
+}
+```
+
+## Mobiltelefon képernyője
+
+p5-ös programokat ugyanúgy megnézhetünk a telefonunk böngészőjében, mint számítógépen. (Viszont ilyenkor fejben kell tartanunk, hogy különböző gyártók különböző termékein futó különböző böngészők nem mindig ugyanúgy viselkednek.)  
+Amíg a képernyőn az egeret és az egérkattintásokat figyeltük, addig a `mouseIsPressed` változót használtuk a kattintás felismerésére, és a `mouseX` és `mouseY` változókat az egér helyének meghatározására. A mobil roppant hasonlóan működik, csak a változókat hívják kicsit másképpen: `touchIsDown`, `touchX` és `touchY`.  
+Példaképpen itt van a képernyőre már megírt primitív paint mobilos változata, amivel az ujjunkkal tudunk rajzolni a képernyőre:  
+```
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+    fill('green');
+    stroke('green');
+}
+
+function draw() {
+    if (touchIsDown) {
+        ellipse(touchX, touchY, 150, 150);
+    }
+}
+```
+
+### Tesztelés
+
+Ha szeretnénk számítógépen kipróbálni, hogyan működne a programunk a telefonon, azt a Chrome fejlesztői eszközeivel megtehetjük. Ha megnyitjuk a JavaScript konzolt (Cmd+Alt+J illetve Ctrl+Shift+J), annak bal felső sarkában találunk egy kis ikont, ami egy telefont illetve egy tabletet ábrázol. Ha ezt bekapcsoljuk, a Chrome mobil eszközt fog szimulálni, ahol a szürke kör jelképezi az ujjunkat, és a kattintás az ujjal való képernyőérintést.  
+Ez hasznos lehet például akkor, ha valami hiba miatt mobilon nem fut a program, de nem tudjuk, mi a hiba. Mobilon sajnos nincs JavaScript konzol, ami kiírná a hibát, de asztali Chrome-ban van, tehát érdemes ilyenkor abban megnyitni a programot, és mobil szimulációra állítva kipróbálni.  
+
+## Számítógépen és mobilon egyaránt működő program
+
+Ha megírtuk a programunkat mobilra, de szeretnénk, ha továbbra is működne számítógépen is, akkor azzal szembesülünk, hogy mind a `touchIsDown`, mind a `mouseIsPressed` változót figyelnünk kell:
+```
+if (mouseIsPressed) {
+    ellipse(mouseX, mouseY, 150, 150);
+}
+if (touchIsDown) {
+    ellipse(touchX, touchY, 150, 150);
+}
+```
+Ez kicsit kényelmetlen. Viszont JavaScriptben az `if`-nek több feltételt is meg lehet adni, amiket ÉS, illetve VAGY kapcsolatba hozhatunk. Az ÉS jele `&&`, a VAGY jele pedig `||`. Jelen esetben az utóbbira van szükségünk:  
+```
+if (mouseIsPressed || touchIsDown) {
+    ellipse(touchX, touchY, 150, 150);
+    ellipse(mouseX, mouseY, 150, 150);
+}
+```
+kiolvasva: "Ha le van nyomva az egérgomb vagy meg van érintve a billentyűzet..."  
+Az if belsejében pedig hagyatkozhatunk arra a trükkre, hogy a `mouseX` és `mouseY` változók ugyan elvileg az egér helyét tárolják, gyakorlatban azonban előzékeny módon az ujjal érintés helyét is visszaadják, tehát használhatóak `touchX` és `touchY` helyett:  
+```
+if (mouseIsPressed || touchIsDown) {
+    ellipse(mouseX, mouseY, 150, 150);
+}
+```
+A fenti program helyesen fog működni számítógépen és mobilon is.
+
+## A telefon mozgásérzékelője
+
+p5-ben hozzáférünk a telefonunk mozgásérzékelőjének adataihoz is. Ezeket a `rotationX`, `rotationY` és `rotationZ` változók adják meg. A három változót úgy kell értelmeznünk, hogy ha elképzeljük, hogy a telefonunk egy repülő, a telefon képernyője a repülő háta, és a telefon teteje a repülő orra, akkor a `rotationX` adja meg a telefon emelkedését, a `rotationY` a jobbra-balra dőlését, a `rotationZ` pedig az útirányát.  
