@@ -1,5 +1,16 @@
 # Hatodik óra: hangok és mobil
 
+## Atom package-ek
+
+Ezen az órán próbaképpen feltettünk két package-et a kódszerkesztő programunkba, amik segítenek hatékonyan programozni.  
+
+Az első neve __jsformat__, és abban segít, hogy a kódunkat helyesen formázzuk meg. Programok írása közben minden leütött betű számít, de általában nagy szabadságot kapunk az ún. whitespace karakterek, tehát szóközök, tabok és enterek használatában. Azonban az, hogy a programnak mindegy, nem jelenti azt, hogy a programozónak is az. Megírás után ugyanis szeretnénk elolvasni a programot, belenyúlni, módosítani stb., ehhez pedig létfontosságú, hogy könnyen el tudjuk olvasni, meg tudjuk érteni, amit írtunk. Gondoljunk bele, hogy [ez a program](https://github.com/endreymarcell/p5-notes/blob/master/06/formatting-examples/01-garbage.js) pontosan ugyanazt csinálja, mint [ez a program](https://github.com/endreymarcell/p5-notes/blob/master/06/formatting-examples/04-nice.js), de ha nekünk kell dolgozni vele, nyilván sokkal könnyeb dolgunk van a második, szépen megformázott változattal. Ebben a formázásban segít nekünk a jsformat. Így kell telepíteni: Atom > Preferences > Install, itt a keresési mezőbe `jsformat` és enter, majd a találatok között a jsformat-on Install. Ha a telepítés befejeződött, megjelenik a Settings gomb, erre kattintva kell kikeresni a `Format on save` opciót. Ezt egyszer ki és újra be kell kattintani.  
+Ha úgy találod, hogy a jsformat inkább zavar, mint segít, nyugodtan kapcsold ki (Atom > Preferences > Packages > jsformat > Disable).  
+
+A második plugin neve __linter-jshint__, ez pedig hibákat keres a kódunkban, és hibaüzeneteket mutat, tipikusan akkor, ha elgépeltünk valamit. Nagyon jól el tudja kapni például azt, ha elfelejtünk bezárni egy kapcsos zárójelet, ha véletlenül kimarad egy vessző egy függvény paramétereinek felsorolásánál, ha elgépeljük a "function" szót stb. A telepítéséhez: Atom > Preferences > Install, itt a keresési mezőbe `linter-jshint` és enter, majd a találatok között a linter-hsinten Install.  
+
+Figyelem: mindkét pacakge kifejezetten JavaScript fájlokhoz van kitalálva, ezért csak akkor fognak működésbe lépni, ha az általunk éppen szerkesztett fájl már el van mentve, méghozzá ".js" kiterjesztéssel!  
+
 ## Hangok lejátszása
 
 Hangokat p5-ben a képekhez hasonló módon használni: először le kell töltenünk egy hangfájlt (.mp3 formátumban) ugyanabba a mappába, ahol a programunk van, a programon belül pedig először bele kell töltenünk egy változóba, utána abból a változóból tudjuk elindítani.  
