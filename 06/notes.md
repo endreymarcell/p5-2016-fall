@@ -16,25 +16,23 @@ Figyelem: mindkét pacakge kifejezetten JavaScript fájlokhoz van kitalálva, ez
 Hangokat p5-ben a képekhez hasonló módon használni: először le kell töltenünk egy hangfájlt (.mp3 formátumban) ugyanabba a mappába, ahol a programunk van, a programon belül pedig először bele kell töltenünk egy változóba, utána abból a változóból tudjuk elindítani.  
 Először tehát létrehozunk egy változót a már letöltött hangfájlnak:  
 `var meow;`  
-Utána beletültjük a hangot a `loadSound()` paranccsal:
+Utána beletültjük a hangot a `loadSound()` paranccsal:  
 `meow = loadSound('cat.mp3')`;  
-Lejátszani pedig úgy tudjuk, hogy meghívjuk a változón a `play()` függvényt:  
-`meow.play()`  
-(Itt tehát a szintaxis kicsit különbözik a képek megjelenítésétől.)  
+Aztán pedig elindítjuk:  
+`playSound(meow);`  
+Illetve meg is tudjuk állítani:  
+`stopSound(meow);`  
 
-Ezzel sajnos még van egy probléma, amit meg kell oldanunk: ha a hangot például egérkattintásra szeretnénk elindítani, a másodpercenként vagy hatvanszor lefutó `draw()` függvény, amiben ezt a bizonyos `play()` parancsot kiadjuk, jópárszor le fog futni, mire mi felengedjük az egérgombot, a hang tehát sokszor el fog indulni, egymástól pár századmásodperc különbséggel. Azt szeretnénk, ha a hang csak akkor indulna el, ha a lejátszása még nincs folyamatban. Ehhez a `play()` parancsot betesszük egy `if`-be. A hangokat tartalmazó változóknak van egy `isPlaying()` nevű függvényük is, ami megmondja, hogy folyik-e már az adott hang lejátszása. Mi ennek pont a _fordítottját_ szeretnénk, tehát hogy a hang akkor induljon el, ha még nem játszódik le. Ezt megírjatjuk akár így:  
+Figyelem: a `playSound()` és `stopSound()` függvényeket én írtam és adom nektek, mert velük egyszerűbb a hangok használata. A fenti program tehát csak akkor fog működni, ha ez a két függvény definiálva van benne, így:  
 ```
-if (meow.isPlaying()) {
-
-} else {
-    meow.play();
+function playSound(sound) {
+  if (!sound.isPlaying()) {
+    sound.play();
+  }
 }
-```
-Kiolvasva: ha a hang már épp lejátszódik, akkor... (nem csinálj semmit) ...különben pedig indítsd el.  
-A másik megldás, hogy az `if` feltételét tagadjuk, tehát az ellentétét vesszük. JavaScriptben ezt a `!` jellel tudjuk megtenni. Így rövidebben is meg tudjuk írni a fenti parancsot:  
-```
-if (!meow.isPlaying()) {    
-    meow.play();
+
+function stopSound(sound) {
+  sound.stop();
 }
 ```
 
@@ -56,9 +54,7 @@ function setup() {
 function draw() {
     background('black');
     if (mouseIsPressed) {
-        if (!scream.isPlaying()) {
-            scream.play();
-        }
+        playSound(scream);
     }
 }
 ```
